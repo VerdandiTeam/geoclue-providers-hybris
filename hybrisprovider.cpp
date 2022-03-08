@@ -501,7 +501,8 @@ void HybrisProvider::setLocation(const Location &location)
 {
     qCDebug(lcGeoclueHybrisPosition) << "Set location"
                                      << location.timestamp() << location.latitude()
-                                     << location.longitude() << location.altitude();
+                                     << location.longitude() << location.altitude()
+                                     << location.accuracy().horizontal() << location.accuracy().vertical();
 
     // Stop listening to all PositionChanged signals from org.freedesktop.Geoclue.Position
     // interfaces.
@@ -1004,6 +1005,8 @@ void HybrisProvider::emitLocationChanged()
     emit PositionChanged(positionFields, m_currentLocation.timestamp() / 1000,
                          m_currentLocation.latitude(), m_currentLocation.longitude(),
                          m_currentLocation.altitude(), m_currentLocation.accuracy());
+
+    qDebug() << m_currentLocation.accuracy().horizontal() << m_currentLocation.accuracy().vertical();
 }
 
 void HybrisProvider::emitSatelliteChanged()
