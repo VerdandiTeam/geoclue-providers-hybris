@@ -530,6 +530,7 @@ void HybrisProvider::setLocation(const Location &location)
     }
 
     qDebug() << location.accuracy().horizontal() << m_currentLocation.accuracy().horizontal();
+    m_currentLocation.setAccuracy(location.accuracy());
 
     emitLocationChanged();
 }
